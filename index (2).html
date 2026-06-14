@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anita Digital – מדריך קרוסלה פרפרים</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0a0a0a;
+      --offwhite:#f0ece4;
+      --pink:    #e8a0b4;
+      --deep:    #1a0a10;
+      --gold:    #d4a853;
+      --glass:   rgba(10,10,10,0.55);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--black);
+      color: var(--offwhite);
+      overflow-x: hidden;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero video {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.45;
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.7) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 0 24px;
+    }
+
+    .hero-logo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 2px solid var(--pink);
+      margin-bottom: 8px;
+    }
+
+    .hero-eyebrow {
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--pink);
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 8vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--offwhite);
+    }
+
+    .hero h1 span {
+      color: var(--pink);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 300;
+      color: rgba(240,236,228,0.75);
+      max-width: 520px;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--pink);
+      opacity: 0.7;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    .scroll-hint svg { width: 18px; opacity: 0.8; }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(6px); }
+    }
+
+    /* ─── MAIN CONTENT ─── */
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── INTRO STRIP ─── */
+    .intro-strip {
+      background: var(--deep);
+      padding: 64px 24px;
+      text-align: center;
+    }
+
+    .intro-strip p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: rgba(240,236,228,0.85);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* ─── STEPS ─── */
+    .steps {
+      padding: 72px 24px;
+      background: var(--black);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 56px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 0 24px;
+      margin-bottom: 56px;
+      align-items: start;
+    }
+
+    .step-num {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--pink);
+      opacity: 0.25;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .step-body h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: var(--offwhite);
+    }
+
+    .step-body p {
+      font-size: 0.97rem;
+      line-height: 1.8;
+      color: rgba(240,236,228,0.72);
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--pink), transparent);
+      opacity: 0.18;
+      margin: 0 0 56px;
+      grid-column: 1/-1;
+    }
+
+    /* ─── PROMPT CARDS ─── */
+    .prompts {
+      background: var(--deep);
+      padding: 72px 24px;
+    }
+
+    .prompt-card {
+      border: 1px solid rgba(232,160,180,0.2);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .prompt-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(232,160,180,0.15);
+    }
+
+    .prompt-card-header .label {
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--pink);
+      font-weight: 600;
+    }
+
+    .prompt-card-header .tool-badge {
+      font-size: 11px;
+      background: rgba(232,160,180,0.12);
+      color: var(--pink);
+      border: 1px solid rgba(232,160,180,0.25);
+      border-radius: 20px;
+      padding: 4px 12px;
+    }
+
+    .prompt-text {
+      padding: 24px;
+      font-size: 0.87rem;
+      line-height: 1.85;
+      color: rgba(240,236,228,0.8);
+      font-family: 'Heebo', sans-serif;
+      direction: ltr;
+      text-align: left;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .copy-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 24px 24px auto;
+      padding: 10px 22px;
+      background: var(--pink);
+      color: var(--black);
+      border: none;
+      border-radius: 30px;
+      font-family: 'Heebo', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s, background 0.15s;
+    }
+
+    .copy-btn:hover { background: #f0b8cb; transform: scale(1.03); }
+
+    .copy-btn.copied {
+      background: var(--gold);
+    }
+
+    .copy-btn svg { width: 16px; }
+
+    /* ─── TIPS ─── */
+    .tips {
+      padding: 72px 24px;
+      background: var(--black);
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .tip-card {
+      background: rgba(232,160,180,0.06);
+      border: 1px solid rgba(232,160,180,0.15);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .tip-icon { font-size: 1.6rem; margin-bottom: 10px; }
+
+    .tip-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .tip-card p {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: rgba(240,236,228,0.65);
+    }
+
+    /* ─── CTA ─── */
+    .cta {
+      padding: 80px 24px;
+      text-align: center;
+      background: var(--deep);
+    }
+
+    .cta h2 {
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .cta p {
+      font-size: 1rem;
+      color: rgba(240,236,228,0.7);
+      max-width: 500px;
+      margin: 0 auto 32px;
+      line-height: 1.8;
+    }
+
+    .ig-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #e8a0b4, #c46d8a);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 30px rgba(232,160,180,0.3);
+    }
+
+    .ig-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(232,160,180,0.45);
+    }
+
+    .ig-btn svg { width: 20px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 32px 24px;
+      text-align: center;
+      background: var(--black);
+      border-top: 1px solid rgba(232,160,180,0.08);
+      font-size: 0.8rem;
+      color: rgba(240,236,228,0.3);
+    }
+
+    footer a { color: var(--pink); text-decoration: none; }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 600px) {
+      .tips-grid { grid-template-columns: 1fr; }
+      .step { grid-template-columns: 40px 1fr; }
+      .step-num { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <video autoplay muted loop playsinline src="bg-video.mp4"></video>
+  <div class="hero-content">
+    <img src="profile.jpg" alt="Anita Digital" class="hero-logo" />
+    <p class="hero-eyebrow">Anita Digital · @eilat_anita_turgeman</p>
+    <h1>קרוסלה <span>חיה</span><br/>עם פרפרים 🦋</h1>
+    <p class="hero-sub">מדריך שלב אחר שלב ליצירת קרוסלה אינסטגרם שנראית כמו תמונה אחת בתנועה</p>
+  </div>
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    גללי למטה
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro-strip">
+  <div class="container">
+    <p>
+      כלים שנדרשים: <strong>ChatGPT</strong> (יצירת תמונה) · <strong>Kling 3</strong> (הנפשה) · <strong>CapCut</strong> (עריכה וחיתוך)<br/>
+      התוצאה: שתי שקופיות שנוצרו מאותו סרטון — מעבר חלק ורציף שעוצר את הגלילה.
+    </p>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="steps">
+  <div class="container">
+    <p class="section-title">השלבים</p>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h2>יצירת התמונה ב-ChatGPT</h2>
+        <p>פתחי את ChatGPT, העלי תמונה של הדמות שרצית להשתמש בה והוספי פרומפט מפורט. המטרה — תמונה אחת רחבה שתיראה טוב גם אחרי חיתוך לשתי שקופיות. השתמשי בפרומפט מטה.</p>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h2>הנפשה ב-Kling 3</h2>
+        <p>העלי את התמונה שיצרת ל-Kling 3. בקשי מהפרפרים לנוע בעדינות — הדמות נשארת ללא תנועה לחלוטין. רק הפרפרים מתעופפים. שמרי את הסרטון בסיום.</p>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h2>שקופית ראשונה ב-CapCut</h2>
+        <p>פתחי את הסרטון ב-CapCut. בחרי יחס <strong>3:4</strong>, הגדילי מעט והזזי לצד אחד כך שיוצג החצי הראשון. הוספי טקסט, הנפשה ושמרי.</p>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h2>שקופית שנייה ב-CapCut</h2>
+        <p>פרויקט חדש, אותו סרטון, יחס <strong>3:4</strong> — הפעם הזזי לצד השני. הוספי טקסט שונה ושמרי.</p>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h2>העלאה לאינסטגרם</h2>
+        <p>העלי את שני הסרטונים כקרוסלה רגילה. בגלל שנוצרו מאותו סרטון, המעבר ביניהן חלק לחלוטין — אפקט שעוצר גלילה.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMPTS -->
+<section class="prompts">
+  <div class="container">
+    <p class="section-title">הפרומפטים שלי — להעתקה</p>
+
+    <!-- PROMPT 1 -->
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <span class="label">פרומפט 1 — יצירת תמונה</span>
+        <span class="tool-badge">ChatGPT</span>
+      </div>
+      <pre class="prompt-text" id="prompt1">Create a seamless Instagram carousel from two 3:4 square slides in a uniform 3:2 layout Very important: this is one continuous image without seams, frames and dividers, which will then be cut in the center into two square slides and without any text at all!!
+Style: Luxury journalistic, premium infographics, modern Instagram design, high readability, expensive minimalist presentation. Background - white studio
+In the center of the composition stands a beautiful girl (reference attached). The girl is located slightly to the left of the center and looks to the side.
+Around the girl, small ultra-realistic pink-white butterflies are randomly hovering. Some of the butterflies are in front of the girl, some behind her. Some butterflies cross the border between the slides, creating a depth effect and seamless connection. The butterflies are of different sizes, some are very large and close to the camera.
+The butterflies create the main visual focus and connect the two parts of the carousel.
+Ultra-realistic photography, luxury journalistic design, cinematic lighting, architectural stone background, floating pink and white butterflies, depth of field, premium typography, seamless carousel, one continuous image, no frames, no dividers, sharp focus, viral Instagram carousel.</pre>
+      <button class="copy-btn" onclick="copyPrompt('prompt1', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        העתקת הפרומפט
+      </button>
+    </div>
+
+    <!-- PROMPT 2 -->
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <span class="label">פרומפט 2 — הנפשה</span>
+        <span class="tool-badge">Kling 3</span>
+      </div>
+      <pre class="prompt-text" id="prompt2">Static camera. Fix the composition completely.
+The girl remains completely still, as in the picture. Do not move her face, eyes, hair, clothes, body, and bag.
+All text, letters, arrows, icons, nickname, save icon, and all graphic elements must remain 100% unchanged. Do not animate, move, distort, replace, or create new text. Do not add new letters, words, symbols, or interface elements. The text is a static, fixed layer.
+Only the butterflies move.
+The butterflies slowly and smoothly float in the air with realistic animation. Some butterflies fly in front of the girl, some behind her. Some butterflies fly in front of the text, others behind it, creating a natural depth and parallax effect. Smooth wing movements, light motion paths, a feeling of weightlessness. Maintain the appearance, color, and size of each butterfly.
+The architecture, floor, walls, lighting, and all the backgrounds remain completely motionless.</pre>
+      <button class="copy-btn" onclick="copyPrompt('prompt2', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        העתקת הפרומפט
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section class="tips">
+  <div class="container">
+    <p class="section-title">דגשים חשובים</p>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon">🖼️</div>
+        <h3>תמונת הדמות</h3>
+        <p>את התמונה שתעלי לצ'אט — זאת התמונה שה-AI ישתמש בה. מומלץ לעלות תמונה שמייצגת אותך, אפילו כזו שיצרת בבינה מלאכותית.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🎨</div>
+        <h3>לשנות את הפרפרים</h3>
+        <p>אפשר לשנות את הפרפרים לכל צבע שתרצי, או להחליף אותם לאלמנט אחר לגמרי. מומלץ לתרגם את הפרומפט לעברית ולשנות.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">✂️</div>
+        <h3>חיתוך ב-CapCut</h3>
+        <p>ודאי שהיחס הוא 3:4 בשני הפרויקטים. חשוב שהאזור שנחתך יהיה בדיוק ממרכז הסרטון לכל כיוון.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🔁</div>
+        <h3>הרקע</h3>
+        <p>אפשר לשנות גם את הרקע לכל צבע שתבחרי — ממליצה לציין את הצבע בפרומפט המקורי.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>רוצה עוד תוכן כזה? 🚀</h2>
+  <p>אני משתפת באופן קבוע טרנדים, כלים ורעיונות חדשים בבינה מלאכותית — הרבה לפני שהם מגיעים לפיד של כולם. כך תהיי בין הראשונות להכיר את הדברים שבאמת עובדים.</p>
+  <a href="https://www.instagram.com/eilat_anita_turgeman" target="_blank" class="ig-btn">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    עקבי אחרי באינסטגרם
+  </a>
+</section>
+
+<footer>
+  <p>נוצר עם ❤️ על ידי <a href="https://www.instagram.com/eilat_anita_turgeman" target="_blank">Anita Digital</a> · @eilat_anita_turgeman</p>
+</footer>
+
+<script>
+  function copyPrompt(id, btn) {
+    const text = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.classList.add('copied');
+      btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg> הועתק!`;
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> העתקת הפרומפט`;
+      }, 2500);
+    });
+  }
+</script>
+</body>
+</html>
